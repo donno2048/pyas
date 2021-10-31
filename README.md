@@ -34,17 +34,21 @@ add_one = function(
     'c3'  # ret
 )
 return_same = function(
-    '8b c7'  # mov eax, edi
-    'c3'  # ret
+    '''
+    8b c7  # mov eax, edi
+    c3  // ret
+    '''
 )
 
 print(add_one(10), "=", return_same(10), "+ 1")
 # output: 11 = 10 + 1
 
 add_numbers = lambda i: function(
-    '8b c7'  # mov eax, edi
-    '83 c0 %.2x' # add eax, i
-    'c3'  # ret
+    '''
+    8b c7  ; mov eax, edi
+    83 c0 %.2x # add eax, i
+    c3  // ret
+    '''
     %i
 )
 
@@ -52,3 +56,5 @@ print(add_numbers(4)(10), "=", "10 + 4")
 # output: 14 = 10 + 4
 
 ```
+
+Comments are noted with `;`, `#` or `//`

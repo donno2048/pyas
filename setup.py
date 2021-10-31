@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 setup(
     name='pyas',
-    version='1.0.0',
+    version='1.0.1',
     license='MIT',
     author='Elisha Hollander',
     author_email='just4now666666@gmail.com',
@@ -14,5 +14,6 @@ setup(
         'Bug Reports': 'https://github.com/donno2048/pyas/issues',
         'Source Code': 'https://github.com/donno2048/pyas',
     },
-    packages=find_packages()
+    packages=find_packages(),
+    python_requires='>=3.8' # version 1.0.0 supports python 3.0+
 )

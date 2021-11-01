@@ -14,6 +14,8 @@ If the answer is yes this is the package for you, using `pyas` you will be able 
 
 ### From PyPI
 
+**Use `pip3 install pyas==1.0.0` if you're using python version former to 3.8, this will disable comments.**
+
 ```sh
 pip3 install pyas
 ```

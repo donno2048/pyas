@@ -57,4 +57,4 @@ print(add_numbers(4)(10), "=", "10 + 4")
 
 ```
 
-Comments are noted with `;`, `#` or `//`
+Comments are noted with `;`, `#` and `//`

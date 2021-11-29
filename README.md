@@ -63,8 +63,6 @@ print(add_numbers(4)(10), "=", "10 + 4")
 
 ### Assembly
 
-Requires `nasm` and `objcopy`
-
 ```py
 from pyas import function
 add_one = function(

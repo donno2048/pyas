@@ -7,8 +7,9 @@ buffer = []
 def __strip_comments(string, separators):
 	for sep in separators: string = string.split(sep)[0]
 	return string
-def function(asm: str, raw = True):
+def function(asm: str, *args, raw = True):
 	global buffer
+	if args: return function(asm, raw=raw)(*args)
 	if raw: asm_parsed = unhexlify(str().join(chunk.strip() for l in asm.splitlines() for chunk in __strip_comments(l, ["#", ";", "//"]).split()))
 	else:
 		temp = NamedTemporaryFile(mode='w+t', delete=False)

@@ -47,16 +47,17 @@ return_same = function(
 print(add_one(10), "=", return_same(10), "+ 1")
 # output: 11 = 10 + 1
 
-add_numbers = lambda i: function(
+add_numbers = lambda i, val: function(
     '''
     8b c7  ; mov eax, edi
     83 c0 %.2x # add eax, i
     c3  // ret
     '''
-    %i
+    %i,
+    val # every value after the first argument will be passed directly to the function if supplied
 )
 
-print(add_numbers(4)(10), "=", "10 + 4")
+print(add_numbers(4, 10), "=", "10 + 4")
 # output: 14 = 10 + 4
 
 ```
@@ -84,17 +85,18 @@ return_same = function(
 print(add_one(10), "=", return_same(10), "+ 1")
 # output: 11 = 10 + 1
 
-add_numbers = lambda i: function(
+add_numbers = lambda i, val: function(
     '''
     mov eax, edi
     add eax, %d
     ret
     '''
     %i,
+    val, # every value after the first argument will be passed directly to the function if supplied
     raw = False
 )
 
-print(add_numbers(4)(10), "=", "10 + 4")
+print(add_numbers(4, 10), "=", "10 + 4")
 # output: 14 = 10 + 4
 
 ```

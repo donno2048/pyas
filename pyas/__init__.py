@@ -9,6 +9,7 @@ def __strip_comments(string, separators):
 	return string
 def function(asm: str, *args, raw = True):
 	global buffer
+	if args: return function(asm, raw=raw)(*args)
 	if raw: asm_parsed = unhexlify(str().join(chunk.strip() for l in asm.splitlines() for chunk in __strip_comments(l, ["#", ";", "//"]).split()))
 	else:
 		temp = NamedTemporaryFile(mode='w+t', delete=False)
@@ -22,5 +23,4 @@ def function(asm: str, *args, raw = True):
 		else: return None
 	buffer += [mmap(-1, length=max(len(asm_parsed)//2, 8), prot=7)]
 	for byte in asm_parsed: buffer[-1].write_byte(byte)
-	if args: return CFUNCTYPE(void)(addressof(void.from_buffer(buffer[-1])))(*args)
 	return CFUNCTYPE(void)(addressof(void.from_buffer(buffer[-1])))

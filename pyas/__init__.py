@@ -7,7 +7,7 @@ buffer = []
 def __strip_comments(string, separators):
 	for sep in separators: string = string.split(sep)[0]
 	return string
-def function(asm: str, *args, raw = True):
+def function(asm: str, /, *args, raw = True):
 	global buffer
 	if args: return function(asm, raw=raw)(*args)
 	if raw: asm_parsed = unhexlify(str().join(chunk.strip() for l in asm.splitlines() for chunk in __strip_comments(l, ["#", ";", "//"]).split()))
@@ -16,7 +16,7 @@ def function(asm: str, *args, raw = True):
 		temp.write(asm)
 		temp.close()
 		name = temp.name
-		if not system("nasm -felf {} -o {}.o".format(name, name)):
+		if not system("nasm -felf {} -o {}.o".format(name, name)): # this isn't cheating, I'm just checking what is the raw machine code to be able to use it
 			system("objcopy -O binary {}.o {}.hex".format(name, name))
 			try: asm_parsed = open("{}.hex".format(name), "rb").read()
 			except FileNotFoundError: return None

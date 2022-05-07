@@ -31,8 +31,7 @@ def function(asm: str, /, *args, raw = True, func_name = "main"):
 		from js import eval, WebAssembly
 		from pyodide import to_js
 		ptr = wasmTable.grow(1)
-		ins = WebAssembly.Instance.new(WebAssembly.Module.new(to_js(asm.encode())))
-		wasmTable.set(ptr, eval(f"(_) => _.exports.{func_name}")(ins))
+		wasmTable.set(ptr, eval(f"(_) => _.exports.{func_name}")(WebAssembly.Instance.new(WebAssembly.Module.new(to_js(asm.encode())))))
 		return CFUNCTYPE(void)(ptr)
 	else:
 		return None

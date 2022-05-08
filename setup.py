@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 setup(
     name='pyas',
-    version='1.2.2',
+    version='1.2.3',
     license='MIT',
     author='Elisha Hollander',
     author_email='just4now666666@gmail.com',

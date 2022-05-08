@@ -109,10 +109,10 @@ pyas will automatically recognize running in a web browser and will run Webassem
 from pyas import function
 add_one = function(
     '''
-    \x00asm\x01\x00\x00\x00\x01\x06\x01`
-    \x01\x7f\x01\x7f\x03\x02\x01\x00\x07
-    \x0b\x01\x07add_one\x00\x00\n\t\x01
-    \x07\x00\x20\x00A\x01j\x0b
+    \0asm\1\0\0\0\1\6\1`\1
+    \x7f\1\x7f\3\2\1\0\7
+    \x0b\1\7add_one\0\0\n\t
+    \1\7\0\x20\0A\x01j\x0b
     ''', func_name = 'add_one')
-print(str(add_one(10)) + "=" + str(add_one(9)) + "+ 1")
+print(f"{add_one(10)} = {add_one(9)} + 1")
 ```

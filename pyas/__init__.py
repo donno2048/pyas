@@ -25,13 +25,13 @@ def function(asm: str, /, *args, raw = True, func_name = "main"):
 			else: return None
 		buffer += [mmap(-1, length=max(len(asm_parsed)//2, 8), prot=7)]
 		for byte in asm_parsed: buffer[-1].write_byte(byte)
-		return CFUNCTYPE(void)(addressof(void.from_buffer(buffer[-1])))
+		ptr = addressof(void.from_buffer(buffer[-1]))
 	elif platform() == "Emscripten":
 		from pyodide_js._module import wasmTable
 		from js import eval, WebAssembly
 		from pyodide import to_js
 		ptr = wasmTable.grow(1)
 		wasmTable.set(ptr, eval(f"(_) => _.exports.{func_name}")(WebAssembly.Instance.new(WebAssembly.Module.new(to_js(asm.encode())))))
-		return CFUNCTYPE(void)(ptr)
 	else:
 		return None
+	return CFUNCTYPE(void)(ptr)

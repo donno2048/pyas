@@ -115,3 +115,5 @@ add_one = function(
     , func_name = 'add_one')
 print(f"{add_one(10)} = {add_one(9)} + 1")
 ```
+
+View [online](https://donno2048.github.io/pyas/)

@@ -4,22 +4,28 @@
         <meta charset="utf-8">
         <title>Pyas demo</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
-        <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
-        <py-script>
-from asyncio import create_task as run
-async def main():
-    from micropip import install
-    await install('pyas')
-    from pyas import function
-    add_one = function(
-        '\0asm\1\0\0\0\1\6\1`\1'
-        '\x7f\1\x7f\3\2\1\0\7'
-        '\x0b\1\7add_one\0\0\n\t'
-        '\1\7\0\x20\0A\x01j\x0b'
-        , func_name = 'add_one')
-    print(f"{add_one(10)} = {add_one(9)} + 1")
-run(main())
-        </py-script>
+        <script src="https://cdn.jsdelivr.net/pyodide/v0.20.0/full/pyodide.js"></script>
     </head>
+    <body>
+        <script>
+            (async() => {
+                let pyodide = await loadPyodide();
+                pyodide.loadPackage("micropip").then(async() => {
+                    await pyodide.runPythonAsync(`await __import__("micropip").install("pyas")`);
+                    document.querySelectorAll('script[type="application/x-python"]').forEach(e => pyodide.runPython(e.textContent, {globals: pyodide.globals.get("dict")()}));
+                });
+            })();
+        </script>
+        <script type="application/x-python">
+from pyas import function
+add_one = function(
+    '\0asm\1\0\0\0\1\6\1`\1'
+    '\x7f\1\x7f\3\2\1\0\7'
+    '\x0b\1\7add_one\0\0\n\t'
+    '\1\7\0\x20\0A\x01j\x0b'
+    , func_name = 'add_one')
+from js import eval
+eval(f"document.body.innerHTML = '{add_one(10)} = {add_one(9)} + 1';")
+        </script>
+    </body>
 </html>

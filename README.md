@@ -6,9 +6,8 @@ Have you ever realized you can't remember how to add numbers in Python but you *
 
 If the answer is yes this is the package for you, using `pyas` you will be able to run machine code, assembly and webassembly directly from within Python!
 
-```diff
-- currently this only supports Linux
-```
+> **Warning**
+> currently this only supports Linux and pyscript
 
 ## Installation
 
